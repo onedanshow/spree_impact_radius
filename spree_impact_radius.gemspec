@@ -4,12 +4,12 @@ Gem::Specification.new do |s|
   s.name        = 'spree_impact_radius'
   s.version     = '2.3.4'
   s.summary     = 'Installs tracking code for Impact Radius into default Spree checkout'
-  s.description = 'Installs tracking code for Impact Radius into default Spree checkout'
+  s.description = 'Installs tracking code for Impact Radius into default Spree checkout so that you can track affiliate sales.'
   s.required_ruby_version = '>= 1.9.3'
 
-  # s.author    = 'You'
-  # s.email     = 'you@example.com'
-  # s.homepage  = 'http://www.spreecommerce.com'
+  s.author    = 'Daniel Dixon'
+  s.email     = 'code@danieldixon.com'
+  s.homepage  = 'http://www.danieldixon.com'
 
   #s.files       = `git ls-files`.split("\n")
   #s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
