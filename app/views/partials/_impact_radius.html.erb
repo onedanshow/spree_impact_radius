@@ -12,7 +12,11 @@
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
     irEvent.setSubTotal("<%= @order.item_total %>");
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
-    irEvent.fire();
+    <% if Rails.env.production? %>
+      irEvent.fire();
+    <% else %>
+      // did not call irEvent.fire because not in production environment
+    <% end %>
   </script>
 
 <% end %>
