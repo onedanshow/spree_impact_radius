@@ -1,7 +1,7 @@
 <!-- Begin Impact Radius Tracking Code -->
 <% if @order && @order.completed_at && @order.completed_at > 1.minute.ago && @order.send_to_impact_radius? %>
 
-  <script type='text/javascript' src='//d33wwcok8lortz.cloudfront.net/js/3115/6899/irv3.js'></script>
+  <script type='text/javascript' src='<%= ENV['IMPACT_RADIUS_JS_URL'] %>'></script>
   <script type='text/javascript'>
     irEvent.setOrderId('<%= j @order.number %>');
     <% @order.line_items.each do |line_item| %>
@@ -9,7 +9,7 @@
     <% end %>
     irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.map{|a| a.source.promotion.code }.join(', ') %>");
     irEvent.setCustomerId("<%= j @order.email.first(50) %>");
-    irEvent.setPostCode("<%= j @order.ship_address.zipcode %>");
+    irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
     irEvent.setSubTotal("<%= @order.item_total %>");
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
     irEvent.fire();
