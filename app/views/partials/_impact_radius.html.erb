@@ -15,7 +15,7 @@
     <% if Rails.env.production? %>
       irEvent.fire();
     <% else %>
-      // did not call irEvent.fire because not in production environment
+      console.log('INFO: Did NOT call irEvent.fire() because this is not a production environment.')
     <% end %>
   </script>
 
