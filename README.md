@@ -20,3 +20,4 @@ IMPACT_RADIUS_JS_URL=//d33wwcok8lortz.cloudfront.net/js/####/####/irv3.js
 
 Free for use by anyone.
 
+Alternatively, if you're using Wombat.co, Impact Radius does have an API for Conversions: http://dev.impactradius.com/display/api/Conversions
