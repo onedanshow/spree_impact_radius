@@ -11,6 +11,7 @@
     irEvent.setCustomerId("<%= j @order.email.first(50) %>");
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
     irEvent.setSubTotal("<%= @order.item_total %>");
+    irEvent.setRebate("<%= @order.promo_total %>");
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
     <% if Rails.env.production? %>
       irEvent.fire();
