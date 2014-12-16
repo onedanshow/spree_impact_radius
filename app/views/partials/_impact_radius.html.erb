@@ -12,7 +12,9 @@
       '<%= line_item.quantity %>');
     <% end %>
     irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.map{|a| a.source.promotion.code }.join(', ') %>");
-    irEvent.setCustomerId("<%= j @order.email.first(50) %>");
+    <% if @order.user_id.present? %>
+    irEvent.setCustomerId("<%= j @order.user_id %>");
+    <% end %>
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
     irEvent.setSubTotal("<%= @order.item_total %>");
     irEvent.setRebate("<%= @order.promo_total %>");
