@@ -1,6 +1,6 @@
 <!-- Begin Impact Radius Tracking Code -->
 <% if @order && @order.completed_at && @order.completed_at > 1.minute.ago && @order.send_to_impact_radius? %>
-
+  
   <script type='text/javascript' src='<%= ENV['IMPACT_RADIUS_JS_URL'] %>'></script>
   <script type='text/javascript'>
     irEvent.setOrderId('<%= j @order.number %>');
@@ -13,7 +13,7 @@
     <% end %>
     irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.map{|a| a.source.promotion.code }.join(', ') %>");
     <% if @order.user_id.present? %>
-    irEvent.setCustomerId("<%= j @order.user_id %>");
+    irEvent.setCustomerId("<%= @order.user_id %>");
     <% end %>
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
     irEvent.setSubTotal("<%= @order.item_total %>");
@@ -22,7 +22,8 @@
     <% if Rails.env.production? %>
       irEvent.fire();
     <% else %>
-      console.log('INFO: Did NOT call irEvent.fire() because this is not a production environment.')
+      if(confirm("Post this order to Impact Radius even though you are NOT running on production?"))
+        irEvent.fire();
     <% end %>
   </script>
 
