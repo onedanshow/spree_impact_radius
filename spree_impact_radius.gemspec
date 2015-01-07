@@ -2,10 +2,10 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_impact_radius'
-  s.version     = '2.3.4'
+  s.version     = '2.4.0'
   s.summary     = 'Installs tracking code for Impact Radius into default Spree checkout'
   s.description = 'Installs tracking code for Impact Radius into default Spree checkout so that you can track affiliate sales.'
-  s.required_ruby_version = '>= 1.9.3'
+  s.required_ruby_version = '>= 2.0.0'
 
   s.author    = 'Daniel Dixon'
   s.email     = 'code@danieldixon.com'
@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'spree_core', '~> 2.3.4'
+  s.add_dependency 'spree_core', '~> 2.4'
 
   #s.add_development_dependency 'capybara', '~> 2.4'
   #s.add_development_dependency 'coffee-rails'
