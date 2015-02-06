@@ -21,7 +21,7 @@
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
     <% if Rails.env.production? %>
       irEvent.fire();
-    <% else %>
+    <% elsif Rails.env.development? %>
       if(confirm("Post this order to Impact Radius even though you are NOT running on production?"))
         irEvent.fire();
     <% end %>
