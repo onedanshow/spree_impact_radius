@@ -1,5 +1,5 @@
 <!-- Begin Impact Radius Tracking Code -->
-<% if @order && @order.completed_at && @order.completed_at > 1.minute.ago && @order.send_to_impact_radius? %>
+<% if @order && @order.send_to_impact_radius? %>
   
   <script type='text/javascript' src='<%= ENV['IMPACT_RADIUS_JS_URL'] %>'></script>
   <script type='text/javascript'>
@@ -11,7 +11,9 @@
       '<%= line_item.discounted_amount - @order.promo_total.abs * line_item.amount / @order.item_total %>', 
       '<%= line_item.quantity %>');
     <% end %>
+    <% if @order.all_adjustments.promotion.eligible.any? %>
     irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.map{|a| a.source.promotion.code }.join(', ') %>");
+    <% end %>
     <% if @order.user_id.present? %>
     irEvent.setCustomerId("<%= @order.user_id %>");
     <% end %>
