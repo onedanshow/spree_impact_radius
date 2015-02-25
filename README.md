@@ -18,7 +18,7 @@ Set the following environment variable with the URL(s) given to you by Impact Ra
 IMPACT_RADIUS_JS_URL=//d33wwcok8lortz.cloudfront.net/js/####/####/irv3.js
 ```
 
-Common delimit them to include multiple trackers.
+Comma delimit them to include multiple trackers.
 
 ```
 IMPACT_RADIUS_JS_URL=//d33wwcok8lortz.cloudfront.net/js/####/####/irv3.js,//d33wwcok8lortz.cloudfront.net/js/####/####/irv3.js
