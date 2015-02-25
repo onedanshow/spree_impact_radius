@@ -1,14 +1,16 @@
 <!-- Begin Impact Radius Tracking Code -->
 <% if @order && @order.send_to_impact_radius? %>
   
-  <script type='text/javascript' src='<%= ENV['IMPACT_RADIUS_JS_URL'] %>'></script>
+  <% ENV['IMPACT_RADIUS_JS_URL'].split(',').each do |url| %>
+
+  <script type='text/javascript' src='<%= url %>'></script>
   <script type='text/javascript'>
     irEvent.setOrderId('<%= j @order.number %>');
     <% @order.line_items.each do |line_item| %>
     irEvent.addItem(
       '<%= j line_item.variant.product.name %>', 
       '<%= j line_item.variant.sku %>', 
-      '<%= line_item.discounted_amount - @order.promo_total.abs * line_item.amount / @order.item_total %>', 
+      '<%= line_item.discounted_amount - @order.adjustments.promotion.eligible.sum(:amount).abs * line_item.amount / @order.item_total %>', 
       '<%= line_item.quantity %>');
     <% end %>
     <% if @order.all_adjustments.promotion.eligible.any? %>
@@ -18,7 +20,7 @@
     irEvent.setCustomerId("<%= @order.user_id %>");
     <% end %>
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
-    irEvent.setSubTotal("<%= @order.item_total %>");
+    irEvent.setSubTotal("<%= @order.item_total.abs %>"); 
     irEvent.setRebate("<%= @order.promo_total %>");
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
     <% if Rails.env.production? %>
@@ -28,6 +30,8 @@
         irEvent.fire();
     <% end %>
   </script>
+
+  <% end %>
 
 <% end %>
 <!-- End Impact Radius Tracking Code -->
