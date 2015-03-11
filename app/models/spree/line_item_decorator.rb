@@ -7,8 +7,9 @@ Spree::LineItem.class_eval do
   private
 
     def discounted_amount_from_order
-      # DD: order.promo_total includes promo adjustments on line items, shipping, and order adjustments
-      (order.promo_total.abs - discounted_amount) * percentage_of_order
+      # DD: do not use order.promo_total; includes promo adjustments on line items, shipping, and order 
+      #   adjustments; just want the latter
+      self.order.adjustments.promotion.eligible.sum(:amount).abs * percentage_of_order
     end
 
     def percentage_of_order
