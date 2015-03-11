@@ -10,7 +10,7 @@
     irEvent.addItem(
       '<%= j line_item.variant.product.name %>', 
       '<%= j line_item.variant.sku %>', 
-      '<%= line_item.discounted_amount - @order.adjustments.promotion.eligible.sum(:amount).abs * line_item.amount / @order.item_total %>', 
+      '<%= line_item.discounted_amount_minus_discounted_amount_from_order %>', 
       '<%= line_item.quantity %>');
     <% end %>
     <% if @order.all_adjustments.promotion.eligible.any? %>
