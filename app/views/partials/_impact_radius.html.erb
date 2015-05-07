@@ -9,8 +9,8 @@
     <% @order.line_items.each do |line_item| %>
     irEvent.addItem(
       '<%= j line_item.variant.product.name %>', 
-      '<%= j line_item.variant.sku %>', 
-      '<%= line_item.discounted_amount_minus_discounted_amount_from_order %>', 
+      '<%= j line_item.variant.sku %>',
+      '<%= line_item.discounted_amount_minus_discounted_amount_from_order.round(2) %>', 
       '<%= line_item.quantity %>');
     <% end %>
     <% if @order.all_adjustments.promotion.eligible.any? %>
@@ -20,8 +20,8 @@
     irEvent.setCustomerId("<%= @order.user_id %>");
     <% end %>
     irEvent.setPostcode("<%= j @order.ship_address.zipcode %>");
-    irEvent.setSubTotal("<%= @order.item_total.abs %>"); 
-    irEvent.setRebate("<%= @order.promo_total %>");
+    irEvent.setSubTotal("<%= @order.item_total.abs.round(2) %>"); 
+    irEvent.setRebate("<%= @order.promo_total.abs.round(2) %>");
     irEvent.setCurrency("<%= @order.currency || 'USD' %>");
     <% if Rails.env.production? %>
       irEvent.fire();
