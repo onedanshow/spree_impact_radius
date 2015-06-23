@@ -13,7 +13,8 @@ Spree::LineItem.class_eval do
     end
 
     def percentage_of_order
-      amount / order.item_total
+      result = amount / order.item_total
+      result.nan? ? 0.0 : result
     end
 
 end
