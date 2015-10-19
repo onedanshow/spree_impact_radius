@@ -14,7 +14,7 @@
       '<%= line_item.quantity %>');
     <% end %>
     <% if @order.all_adjustments.promotion.eligible.any? %>
-        irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.reject{|a| a.source.nil?}.map {|a| a.source.promotion.code }.uniq.first %>");
+        irEvent.setPromoCode("<%= j @order.all_adjustments.promotion.eligible.reject{|a| a.source.nil?}.map {|a| a.source.promotion.code }.uniq.first.try(:upcase) %>");
     <% end %>
     <% if @order.user_id.present? %>
     irEvent.setCustomerId("<%= @order.user_id %>");
